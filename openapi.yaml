@@ -1,7 +1,7 @@
 openapi: 3.0.1
 info:
   title: Flotilla API
-  version: 0.1.9
+  version: 0.1.11
   contact:
     email: fg_robot_dev@equinor.com
   license:
@@ -52,24 +52,24 @@ paths:
         - read
         - write
       tags:
-        - Robots
+      - Robots
       parameters:
-        - in: query
-          name: page
-          schema:
-            type: integer
-            format: int32
-            description: Page number
-            default: 0
-          required: false
-        - in: query
-          name: page_size
-          schema:
-            type: integer
-            format: int32
-            description: Page size
-            default: 100
-          required: false
+      - in: query
+        name: page
+        schema:
+          type: integer
+          format: int32
+          description: Page number
+          default: 0
+        required: false
+      - in: query
+        name: page_size
+        schema:
+          type: integer
+          format: int32
+          description: Page size
+          default: 100
+        required: false
       responses:
         '200':
           content:
@@ -196,7 +196,6 @@ paths:
           $ref: '#/components/responses/Forbidden'
         '404':
           $ref: '#/components/responses/NotFound'
- 
   /robots/{robot_id}/start/{mission_id}:
     post:
       operationId: postStartRobot
@@ -392,55 +391,57 @@ paths:
       description: '### Overview
 
         Lookup events.
-        
-        The `start_time` defaults to the current time, `end_time` defaults to `start_time` + 7 days. If no `robot_id` is provided, events for all enabled robots on the asset is included.
+
+        The `start_time` defaults to the current time, `end_time` defaults to `start_time`
+        + 7 days. If no `robot_id` is provided, events for all enabled robots on the
+        asset is included.
 
         '
       tags:
       - Events
       security:
-        - OAuth2:
-            - read
+      - OAuth2:
+        - read
       parameters:
-        - in: query
-          name: robot_id
-          required: false
-          schema:
-            type: integer
-            format: int32
-            example: 21
-        - in: query
-          name: start_time
-          schema:
-            type: string
-            format: date-time
-            description: Earliest start time for scheduled missions
-            example: '2022-01-12T10:33:33Z'
-          required: false
-        - in: query
-          name: end_time
-          schema:
-            type: string
-            format: date-time
-            description: Latest end time for scheduled missions
-            example: '2022-02-12T12:33:33Z'
-          required: false
-        - in: query
-          name: page
-          schema:
-            type: integer
-            format: int32
-            description: Page number
-            default: 0
-          required: false
-        - in: query
-          name: page_size
-          schema:
-            type: integer
-            format: int32
-            description: Page size
-            default: 100
-          required: false
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          type: integer
+          format: int32
+          example: 21
+      - in: query
+        name: start_time
+        schema:
+          type: string
+          format: date-time
+          description: Earliest start time for scheduled missions
+          example: '2022-01-12T10:33:33Z'
+        required: false
+      - in: query
+        name: end_time
+        schema:
+          type: string
+          format: date-time
+          description: Latest end time for scheduled missions
+          example: '2022-02-12T12:33:33Z'
+        required: false
+      - in: query
+        name: page
+        schema:
+          type: integer
+          format: int32
+          description: Page number
+          default: 0
+        required: false
+      - in: query
+        name: page_size
+        schema:
+          type: integer
+          format: int32
+          description: Page size
+          default: 100
+        required: false
       responses:
         '200':
           content:
@@ -448,7 +449,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Event"
+                  $ref: '#/components/schemas/Event'
           description: Request successful
         '401':
           $ref: '#/components/responses/Unauthorized'
@@ -635,8 +636,9 @@ paths:
       summary: List all available reports on the asset
       description: '### Overview
 
-        List all available reports on the asset. `start_time` defaults to current time - 7 days and `end_time` defaults to current time. If no value for `robot_id` is provided, reports for all robots on the asset is provided.
-        '
+        List all available reports on the asset. `start_time` defaults to current
+        time - 7 days and `end_time` defaults to current time. If no value for `robot_id`
+        is provided, reports for all robots on the asset is provided. '
       tags:
       - Reports
       security:
@@ -644,55 +646,55 @@ paths:
         - read
         - write
       parameters:
-        - in: query
-          name: robot_id
-          required: false
-          schema:
-            type: integer
-            format: int32
-            example: 21
-        - in: query
-          name: start_time
-          schema:
-            type: string
-            format: date-time
-            description: Earliest start time for returned reports
-            example: '2022-01-12T10:33:33Z'
-          required: false
-        - in: query
-          name: end_time
-          schema:
-            type: string
-            format: date-time
-            description: Latest end time for returned reports
-            example: '2022-01-14T13:33:33Z'
-          required: false
-        - in: query
-          name: status
-          schema:
-            type: string
-            description: Status for mission
-            enum:
-              - completed
-              - active
-              - aborted
-          required: false
-        - in: query
-          name: page
-          schema:
-            type: integer
-            format: int32
-            description: Page number
-            default: 0
-          required: false
-        - in: query
-          name: page_size
-          schema:
-            type: integer
-            format: int32
-            description: Page size
-            default: 100
-          required: false
+      - in: query
+        name: robot_id
+        required: false
+        schema:
+          type: integer
+          format: int32
+          example: 21
+      - in: query
+        name: start_time
+        schema:
+          type: string
+          format: date-time
+          description: Earliest start time for returned reports
+          example: '2022-01-12T10:33:33Z'
+        required: false
+      - in: query
+        name: end_time
+        schema:
+          type: string
+          format: date-time
+          description: Latest end time for returned reports
+          example: '2022-01-14T13:33:33Z'
+        required: false
+      - in: query
+        name: status
+        schema:
+          type: string
+          description: Status for mission
+          enum:
+          - completed
+          - active
+          - aborted
+        required: false
+      - in: query
+        name: page
+        schema:
+          type: integer
+          format: int32
+          description: Page number
+          default: 0
+        required: false
+      - in: query
+        name: page_size
+        schema:
+          type: integer
+          format: int32
+          description: Page size
+          default: 100
+        required: false
       responses:
         '200':
           content:
@@ -1161,6 +1163,7 @@ components:
       - missionId
       - startTime
       - endTime
+      - status
       properties:
         id:
           type: integer
@@ -1193,6 +1196,14 @@ components:
           format: date-time
           description: Expected end time for scheduled mission in local time
           example: '2022-01-13T10:33:33Z'
+        status:
+          type: string
+          description: Status the event
+          enum:
+          - pending
+          - started
+          - completed
+          - failed
       additionalProperties: false
     PostResponse:
       type: object
