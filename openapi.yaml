@@ -77,7 +77,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/GetRobot'
+                  $ref: '#/components/schemas/Robot'
           description: Request successful
         '401':
           $ref: '#/components/responses/Unauthorized'
@@ -107,7 +107,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Robot'
+              $ref: '#/components/schemas/RobotRequest'
             examples:
               createRobot:
                 $ref: '#/components/examples/createRobot'
@@ -152,7 +152,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/GetRobot'
+                $ref: '#/components/schemas/Robot'
           description: Request successful and robot returned
         '401':
           $ref: '#/components/responses/Unauthorized'
@@ -828,7 +828,7 @@ components:
             read: Grants read access
             write: Grants write access
   schemas:
-    Robot:
+    RobotRequest:
       type: object
       required:
       - name
@@ -882,9 +882,9 @@ components:
             - image
             - audio
       additionalProperties: false
-    GetRobot:
+    Robot:
       allOf:
-        - $ref: "#/components/schemas/Robot"
+        - $ref: "#/components/schemas/RobotRequest"
         - type: object
           required:
             - id
